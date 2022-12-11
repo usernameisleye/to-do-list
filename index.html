@@ -7,9 +7,77 @@
     <title>To-Do List</title>
     <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/d39106e7f3.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <main></main>
+    <main class="container">
+        <div class="task-input">
+            <i class="fa-solid fa-bars"></i>
+            <input type="text" placeholder="Add a new task">
+        </div>
+
+        <div class="content">
+            <div class="status">
+                <span class="all">All</span>
+                <span class="pending">Pending</span>
+                <span class="completed">Completed</span>
+            </div>
+
+            <button>Clear Tasks</button>
+        </div>
+
+        <div class="task-content">
+            <li class="task">
+                <label for="I">
+                    <input type="checkbox" id="I">
+                    <p>Go to Hannah's partey</p>
+                </label>
+
+                <div class="options">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </li>
+        </div>
+
+        <div class="task-content">
+            <li class="task">
+                <label for="I">
+                    <input type="checkbox" id="I">
+                    <p>Get some groceries</p>
+                </label>
+
+                <div class="options">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </li>
+        </div>
+
+        <div class="task-content">
+            <li class="task">
+                <label for="I">
+                    <input type="checkbox" id="I">
+                    <p>Mop the roof</p>
+                </label>
+
+                <div class="options">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </li>
+        </div>
+
+        <div class="task-content">
+            <li class="task">
+                <label for="I">
+                    <input type="checkbox" id="I">
+                    <p>Continue watching Shippudeen</p>
+                </label>
+
+                <div class="options">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </li>
+        </div>
+    </main>
 </body>
 </html>
