@@ -4,13 +4,32 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
 }
+body, .task-input, .content, .status{
+    display: flex;
+}
 body{
     background-color: #5B85AA;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 main{
     background-color: #FFF;
+    width: 25rem;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+.task-input{
+    height: 3rem;
+    padding: .5rem;
+    align-items: center;
+    gap: .5rem;
+}
+.task-input input{
+    width: 100%;
+    height: 100%;
+    padding: .4rem;
+}
+.task-input i{
+    font-size: 1.5rem;
 }
