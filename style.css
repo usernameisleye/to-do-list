@@ -28,16 +28,22 @@ main{
     height: 3rem;
     padding: .5rem 0;
     gap: .5rem;
+    position: relative;
 }
 .task-input input{
     width: 100%;
     height: 100%;
     padding: .4rem;
+    padding-left: 2rem;
     font-size: 1rem;
     outline: none;
 }
 .task-input i{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    opacity: 60%;
+    position: absolute;
+    top: 30%;
+    left: 2%;
 }
 .content, .status, .task{
     justify-content: space-between;
