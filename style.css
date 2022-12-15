@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;  
 }
 body, .task-input, .content, .status, .task, label{
     display: flex;
@@ -10,7 +10,7 @@ body, .task-input, .content, .status, .task, label{
 body, .task-input, .content, .status, .task{
     align-items: center;
 }
-i, label, label input, .status span, button{
+i, label, label input, .status span, button, .task-options li{
     cursor: pointer;
 }
 body{
@@ -24,11 +24,13 @@ main{
     padding: 1rem;
     border-radius: .5rem;
 }
+.task-input, .options{
+    position: relative;
+}
 .task-input{
     height: 3rem;
     padding: .5rem 0;
     gap: .5rem;
-    position: relative;
 }
 .task-input input{
     width: 100%;
@@ -38,10 +40,12 @@ main{
     font-size: 1rem;
     outline: none;
 }
+.task-input i, .task-options{
+    position: absolute;
+}
 .task-input i{
     font-size: 1.2rem;
     opacity: 60%;
-    position: absolute;
     top: 30%;
     left: 2%;
 }
@@ -74,4 +78,30 @@ label{
 }
 label input{
     margin-right: 1rem;
+}
+.task-options{
+    background-color: #FFF;
+    box-shadow: 0 4px 9px 0 rgba(0,0,0,.2);
+    list-style: none;
+    width: 7rem;
+    padding:.5rem 0;
+    z-index: 1;
+    top: 5%;
+    right: 0;
+    transform: scale(0);
+    transition: .25s;
+    transform-origin: top right;
+}
+.options:hover .task-options{
+    transform: scale(1);
+}
+.task-options li{
+    margin-bottom: .2rem;
+    padding: .5rem 1rem;
+}
+.task-options li:hover{
+    background-color: #CCC;
+}
+.task-options li i{
+    margin-right: .5rem;
 }
