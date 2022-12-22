@@ -1,16 +1,26 @@
 const taskInput = document.querySelector('.task-input input');
 const taskContent = document.querySelector('.task-content');
+const taskStatus = document.querySelectorAll('.status span');
+let activeStatus = document.querySelector('span.active');
 
+let editTaskId;
+let isEdited = false;
 taskInput.addEventListener('keyup', e =>{
     let taskValue = taskInput.value;
     
     if(e.key == 'Enter' && taskValue != ''){
-        if(!todoList){
-            todoList = [];
+        if(!isEdited){
+            if(!todoList){
+                todoList = [];
+            }
+            let todoValues = {name: taskValue, status: 'pending'};
+            todoList.push(todoValues);//adding new todo to todoList
+        }
+        else{
+            todoList[editTaskId].name = taskValue;
+            isEdited = false; 
         }
         taskInput.value = '';
-        let todoValues = {name: taskValue, status: 'Pending'};
-        todoList.push(todoValues);//adding new todo to todoList
         localStorage.setItem('todo-list', JSON.stringify(todoList));//saving to localStorage with name as todo-list
         showTodo();
     }
@@ -35,8 +45,8 @@ function showTodo(){
                         <i class="fa-solid fa-ellipsis" onclick="showTaskMenu(this)"></i>
                         
                         <ul class="task-options">
-                            <li><i class="fa-regular fa-pen-to-square"></i>Edit</li>
-                            <li><i class="fa-regular fa-trash-can"></i>Delete</li>
+                            <li onclick="editTask(${id}, '${todo.name}')"><i class="fa-regular fa-pen-to-square"></i>Edit</li>
+                            <li onclick="deleteTask(${id})"><i class="fa-regular fa-trash-can"></i>Delete</li>
                         </ul>
                     </div>
                 </li>`
@@ -65,8 +75,27 @@ function showTaskMenu(taskOptions){
 
     showTaskOptions.classList.add('show');
     document.addEventListener('click', e =>{
-        if(e.target != taskOptions || e.target.tagName != 'I' ){
+        if(e.target != taskOptions || e.target.tagName != 'I'){
             showTaskOptions.classList.remove('show');
         }
     })
 }
+
+function deleteTask(deleteTaskId){
+    todoList.splice(deleteTaskId, 1);
+    localStorage.setItem('todo-list', JSON.stringify(todoList));
+    showTodo();
+}
+
+function editTask(taskId, taskName){
+    taskInput.value = taskName; 
+    editTaskId = taskId; 
+    isEdited = true;
+}
+
+taskStatus.forEach(statusBtn =>{
+    statusBtn.addEventListener('click', () =>{
+        activeStatus.classList.remove('active');
+        statusBtn.classList.add('active');
+    })
+})
