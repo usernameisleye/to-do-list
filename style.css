@@ -51,6 +51,9 @@ main{
     top: 15%;
     left: 2%;
 }
+.crossed{
+    text-decoration: line-through;
+}
 .content, .status, .task{
     justify-content: space-between;
 }
@@ -105,7 +108,7 @@ label input{
     transition: .25s;
     transform-origin: top right;
 }
-.options:hover .task-options{
+.task-options.show{
     transform: scale(1);
 }
 .task-options li{
