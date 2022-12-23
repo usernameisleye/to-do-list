@@ -51,6 +51,10 @@ main{
     top: 15%;
     left: 2%;
 }
+.task-content{
+    padding: 1rem 0 0;
+    text-align: center;
+}
 .crossed{
     text-decoration: line-through;
 }
@@ -80,6 +84,7 @@ button{
     background-color: #5B85AA;
     color: #FFF;
     border: none;
+    outline: none;
     border-radius: .2rem;
     transition: .25s;
 }

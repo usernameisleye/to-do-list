@@ -1,8 +1,9 @@
 const taskInput = document.querySelector('.task-input input');
 const taskContent = document.querySelector('.task-content');
 const taskStatus = document.querySelectorAll('.status span');
-let activeStatus = document.querySelector('span.active');
+const clearAllBtn = document.querySelector('button');
 
+clearAllBtn.addEventListener('click', clearAll);
 let editTaskId;
 let isEdited = false;
 taskInput.addEventListener('keyup', e =>{
@@ -22,39 +23,41 @@ taskInput.addEventListener('keyup', e =>{
         }
         taskInput.value = '';
         localStorage.setItem('todo-list', JSON.stringify(todoList));//saving to localStorage with name as todo-list
-        showTodo();
+        showTodo('all');
     }
 })
 
 let todoList = JSON.parse(localStorage.getItem('todo-list'));//getting localStorage todo-list then parsing
 
-function showTodo(){
+function showTodo(taskState){
     let li = '';
     if(todoList){//if todoList exists
         todoList.forEach((todo, id) =>{
             //if status is completed, then set isChecked to 'checked'
             let isChecked = todoList.status == 'completed' ? 'checked' : '';
-
-            li +=  `<li class="task">
-                    <label for="${id}">
-                        <input onclick="taskUpdate(this)" type="checkbox" id="${id}" ${isChecked}>
-                        <p class="${isChecked}">${todo.name}</p>
-                    </label>
-    
-                    <div class="options">
-                        <i class="fa-solid fa-ellipsis" onclick="showTaskMenu(this)"></i>
-                        
-                        <ul class="task-options">
-                            <li onclick="editTask(${id}, '${todo.name}')"><i class="fa-regular fa-pen-to-square"></i>Edit</li>
-                            <li onclick="deleteTask(${id})"><i class="fa-regular fa-trash-can"></i>Delete</li>
-                        </ul>
-                    </div>
-                </li>`
+            // console.log(todoList[1])
+            if(taskState == 'all' || taskState == todoList[id].status ){
+                li +=  `<li class="task">
+                        <label for="${id}">
+                            <input onclick="taskUpdate(this)" type="checkbox" id="${id}" ${isChecked}>
+                            <p class="${isChecked}">${todo.name}</p>
+                        </label>
+        
+                        <div class="options">
+                            <i class="fa-solid fa-ellipsis" onclick="showTaskMenu(this)"></i>
+                            
+                            <ul class="task-options">
+                                <li onclick="editTask(${id}, '${todo.name}')"><i class="fa-regular fa-pen-to-square"></i>Edit</li>
+                                <li onclick="deleteTask(${id})"><i class="fa-regular fa-trash-can"></i>Delete</li>
+                            </ul>
+                        </div>
+                    </li>`
+            }
         }); 
     }
-    taskContent.innerHTML = li;
+    taskContent.innerHTML = li || `<span>There are currently no tasks here</span>`;
 }
-showTodo();  
+showTodo('all');  
 
 function taskUpdate(selectedTask){
     let taskInfo = selectedTask.parentElement.lastElementChild;//geting task name
@@ -84,7 +87,7 @@ function showTaskMenu(taskOptions){
 function deleteTask(deleteTaskId){
     todoList.splice(deleteTaskId, 1);
     localStorage.setItem('todo-list', JSON.stringify(todoList));
-    showTodo();
+    showTodo('all');
 }
 
 function editTask(taskId, taskName){
@@ -95,7 +98,14 @@ function editTask(taskId, taskName){
 
 taskStatus.forEach(statusBtn =>{
     statusBtn.addEventListener('click', () =>{
-        activeStatus.classList.remove('active');
+        document.querySelector('span.active').classList.remove('active');
         statusBtn.classList.add('active');
+        showTodo(statusBtn.id); 
     })
 })
+
+function clearAll(){
+    todoList.splice(0, todoList.lenght);
+    localStorage.setItem('todo-list', JSON.stringify(todoList));
+    showTodo();
+}
